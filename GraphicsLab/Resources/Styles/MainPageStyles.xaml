@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="GraphicsLab.Resources.Styles.MainPageStyles">
+
+    <Style x:Key="MainPageStyle" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundImageSource" Value="background_main_page_image.png"/>
+    </Style>
+
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Lavender}, Dark={StaticResource Lavender}}"/>
+        <Setter Property="FontSize" Value="{OnPlatform WinUI=Header, Default=32}" />
+        <Setter Property="FontFamily" Value="SpaceGroteskBold"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style x:Key="IntroductoryTextLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OffBlack}, Dark={StaticResource WhiteSmoke}}"/>
+        <Setter Property="FontSize" Value="{OnPlatform WinUI=Title, Default=Medium}" />
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+
+    <Style x:Key="SupportInfoLabelStyle" TargetType="Label" BasedOn="{StaticResource IntroductoryTextLabelStyle}">
+        <Setter Property="Padding" Value="0, 10, 0, 0"/>
+        <Setter Property="FontSize" Value="{OnPlatform WinUI=Default, Default=Small}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+
+</ResourceDictionary>

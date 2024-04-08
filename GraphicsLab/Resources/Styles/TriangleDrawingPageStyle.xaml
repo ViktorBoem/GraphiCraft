@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:xctk="http://schemas.xceed.com/maui/xaml/toolkit"
+                    xmlns:vm="clr-namespace:GraphicsLab.MVVM.ViewModel.TriangleDrawHelperViewModel;assembly=GraphicsLab"
+                    xmlns:local="clr-namespace:GraphicsLab.MVVM.View"
+                    x:Class="GraphicsLab.Resources.Styles.TriangleDrawingPageStyle">
+
+    <Style x:Key="TriangleDrawingPageStyle" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundImageSource" Value="background_triangle_page_image.png"/>
+        <Setter Property="Padding" Value="25"/>
+    </Style>
+
+    <Style x:Key="TriangleInputGridStyle" TargetType="Grid">
+        <Setter Property="Padding" Value="25,25,25,5"/>
+    </Style>
+
+    <Style x:Key="TriangleInputBorderStyle" TargetType="xctk:Border">
+        <Setter Property="Background" Value="{StaticResource Jet}"/>
+        <Setter Property="CornerRadius" Value="15"/>
+    </Style>
+
+    <Style x:Key="ControlBorderStyle" TargetType="xctk:Border">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DavysGray}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="SelectedColorControlTextStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
+    <Style x:Key="ShapePickerStyle" TargetType="Picker">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="Small"/>
+    </Style>
+
+    <ControlTemplate x:Key="SelectingTriangleColour">
+        <xctk:Border Style="{StaticResource ControlBorderStyle}">
+            <Grid Padding="8">
+
+                <Grid.BindingContext>
+                    <x:Static Member="vm:ColorPickerViewModel.Instance"/>
+                </Grid.BindingContext>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VisualColorPickerCommand}" />
+                </Grid.GestureRecognizers>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.15*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <BoxView Grid.Column="0"
+                         BackgroundColor="{Binding SelectedColor}">
+                    
+                    <BoxView.BindingContext>
+                        <x:Static Member="vm:ColorPickerViewModel.Instance"/>
+                    </BoxView.BindingContext>
+                    
+                </BoxView>
+
+                <Label Text="Triangle colour" 
+                       Grid.Column="2"
+                       Style="{StaticResource SelectedColorControlTextStyle}"/>
+                
+            </Grid>
+        </xctk:Border>
+    </ControlTemplate>
+    
+</ResourceDictionary>

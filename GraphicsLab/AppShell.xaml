@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="GraphicsLab.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:GraphicsLab"
+       xmlns:triengle="clr-namespace:GraphicsLab.MVVM.View"
+       FlyoutBackgroundColor="{StaticResource OffBlack}">
+
+    <Shell.FlyoutHeader>
+        <Image Source="logo.png"
+               Style="{StaticResource ShellFlyoutHeaderStyleImage}"/>
+    </Shell.FlyoutHeader>
+
+    <Shell.TitleView>
+        <Label Text="Main Page" 
+               Style="{StaticResource ShellTytleStyleLabel}" />
+    </Shell.TitleView>
+
+    <ShellContent Title="Main Page"
+                  ContentTemplate="{DataTemplate triengle:MainPage}"
+                  Route="MainPage"
+                  Icon="home_icon.png"/>
+
+    <ShellContent Title="Draw Triangles"
+                  ContentTemplate="{DataTemplate triengle:TriangleDrawingPage}"
+                  Route="TriangleDrawingPage"
+                  Icon="triangle_icon.png"/>
+
+    <ShellContent Title="Bezier Сurve"
+                  ContentTemplate="{DataTemplate triengle:MainPage}"
+                  Route="MainPage1"
+                  Icon="bezier_curve_icon.png"/>
+
+    <Shell.FlyoutFooter>
+        <Image Source="programmer_footer.png"/>
+    </Shell.FlyoutFooter>
+
+</Shell>

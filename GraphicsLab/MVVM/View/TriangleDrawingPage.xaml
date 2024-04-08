@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:xctk="http://schemas.xceed.com/maui/xaml/toolkit"
+             xmlns:mauiToolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:GraphicsLab.MVVM.ViewModel"
+             xmlns:coordinateSysVM="clr-namespace:GraphicsLab.MVVM.ViewModel.CoordinateSystemDrawHelper"
+             xmlns:triangleDrawVM="clr-namespace:GraphicsLab.MVVM.ViewModel.TriangleDrawHelperViewModel;assembly=GraphicsLab"
+             x:Class="GraphicsLab.MVVM.View.TriangleDrawingPage"
+             Style="{StaticResource TriangleDrawingPageStyle}">
+
+    <Grid ColumnDefinitions="*,*" 
+          RowDefinitions="*,2*,*"
+          ColumnSpacing="100">
+
+        <xctk:Border Grid.Column="0" 
+                     Grid.Row="1"
+                     Style="{StaticResource TriangleInputBorderStyle}">
+            
+            <Grid ColumnDefinitions="*, 0.05*, *" 
+                  RowDefinitions="0.8*, 0.275*, 0.5*" 
+                  Style="{StaticResource TriangleInputGridStyle}">
+
+                <Grid Grid.Row="0"
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="3"
+                      ColumnDefinitions="*, 0.05*, *"
+                      RowDefinitions="*, *">
+
+                    <Grid.BindingContext>
+                        <triangleDrawVM:TriangleCoordinatesViewModel/>
+                    </Grid.BindingContext>
+
+                    <uranium:TextField Grid.Column="0" Grid.Row="0" Title="Enter X1:" Text="{Binding X1}"/>
+                    <uranium:TextField Grid.Column="2" Grid.Row="0" Title="Enter Y1:" Text="{Binding Y1}"/>
+                    <uranium:TextField Grid.Column="0" Grid.Row="2" Title="Enter X2:" Text="{Binding X2}"/>
+                    <uranium:TextField Grid.Column="2" Grid.Row="2" Title="Enter Y2:" Text="{Binding Y2}"/>
+                </Grid>
+
+                <ContentView Grid.Column="0" 
+                             Grid.Row="1" 
+                             ControlTemplate="{StaticResource SelectingTriangleColour}"/>
+
+                <xctk:Border Grid.Column="3" 
+                             Grid.Row="1" 
+                             Style="{StaticResource ControlBorderStyle}">
+
+                    <Picker ItemsSource="{Binding Shapes}" 
+                            SelectedItem="{Binding SelectedShape}"
+                            Style="{StaticResource ShapePickerStyle}">
+
+                        <Picker.BindingContext>
+                            <triangleDrawVM:PickerShapeViewModel/>
+                        </Picker.BindingContext>
+
+                    </Picker>
+                </xctk:Border>
+
+                <Button Grid.Row="2" 
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Text="Draw Triangle" 
+                        Style="{StaticResource DrawButtonStyle}"
+                        Command="{Binding InvalidateCanvaCommand}"
+                        CommandParameter="{x:Reference canvasView}">
+
+                    <Button.BindingContext>
+                        <viewModels:TriangleDrawViewModel/>
+                    </Button.BindingContext>
+
+                </Button>
+
+            </Grid>
+        </xctk:Border>
+
+        <skia:SKCanvasView x:Name="canvasView" 
+                           Grid.Column="1" 
+                           Grid.Row="0" 
+                           Grid.RowSpan="3">
+
+            <skia:SKCanvasView.BindingContext>
+                <viewModels:CoordinateSystemDrawViewModel/>
+            </skia:SKCanvasView.BindingContext>
+
+            <skia:SKCanvasView.Behaviors>
+                <coordinateSysVM:CoordinateSystemCanvaBehavior/>
+            </skia:SKCanvasView.Behaviors>
+
+        </skia:SKCanvasView>
+
+    </Grid>
+
+
+</ContentPage>
